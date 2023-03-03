@@ -27,8 +27,9 @@ def create_render_folder(folder):
         print("creating output folder ", render_path)
         os.makedirs(render_path)
 
+def render_schematic_wb_cmd(file, ofolder):
+    return f"{get_kicad_cli()} {get_export_cmd()} {output_cmd(ofolder)} {file}"
 
-def render_schematic_wb_cmd(folder, ofolder) -> list[str]:
+def render_schematics_from_folder(folder, ofolder) -> list[str]:
     create_render_folder(ofolder)
-    return [f"{get_kicad_cli()} {get_export_cmd()} {output_cmd(ofolder)} {f}"
-            for f in sch_files(folder)]
+    return [render_schematic_wb_cmd(f, ofolder) for f in sch_files(folder)]

@@ -17,7 +17,12 @@ pipx install kicad_gitdiff
 
 [source,shell]
 ----
-
+kdiff_initialize
+----
+=== Running a diff
+[source,shell]
+----
+git diff HEAD~1 .\one_test.kicad_sch
 ----
 
 == Development

@@ -16,7 +16,7 @@ setup(
     entry_points={
         'console_scripts':
             ['kdiff_initialize = git_config_template:append_custom_git_config',
-             # 'kicad_sch_diff = ',
+             'kicad_sch_diff = sch_diff:git_diff',
              ]
         },
     )

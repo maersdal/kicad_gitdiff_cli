@@ -1,0 +1,2 @@
+from .check_for_kicad_on_path import check_for_kicad
+check_for_kicad()
