@@ -1,0 +1,6 @@
+
+# automatically added by kicad_gitdiff_cli
+[diff "kicad_sch_diff"]
+    command = kicad_sch_diff
+    binary = true
+# kicad_gitdiff_cli end

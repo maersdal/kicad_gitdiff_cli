@@ -1,0 +1,32 @@
+= Readme
+
+Simple visual diff for kicad 7 or higher. one can easily extend
+this tool to build a diff-er for anything that outputs svg.
+
+== Recommended installation
+
+[source,shell]
+----
+pip install pipx
+pipx install kicad_gitdiff
+----
+
+== Usage
+
+=== Once per repository
+
+[source,shell]
+----
+
+----
+
+== Development
+
+=== Manually testing
+
+[source,shell]
+----
+pip install -e .
+# or [not sure if this works..]
+pipx install --editable .
+----

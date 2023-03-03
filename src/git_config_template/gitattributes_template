@@ -1,0 +1,3 @@
+
+# automatically added by kicad_gitdiff_cli
+*.kicad_sch	diff=kicad_sch_diff
