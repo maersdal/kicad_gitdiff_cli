@@ -3,23 +3,32 @@
 Simple visual diff for kicad 7 or higher. one can easily extend
 this tool to build a diff-er for anything that outputs svg.
 
-== Recommended installation
+This is not an official kicad tool or anything, just a friday night project.
+
+My goal was just to get some `git` integration with the Kicad file formats.
+
+== Installation
+
+.Requirements
+* Git
+* KiCad 7 or later
 
 [source,shell]
 ----
-pip install pipx
-pipx install kicad_gitdiff
+# in kicad terminal
+pip install kicad_gitdiff
 ----
 
 == Usage
 
-=== Once per repository
 
+.Only once per repository
 [source,shell]
 ----
 kdiff_initialize
 ----
-=== Running a diff
+
+.Diff example
 [source,shell]
 ----
 git diff HEAD~1 .\one_test.kicad_sch
@@ -31,7 +40,28 @@ git diff HEAD~1 .\one_test.kicad_sch
 
 [source,shell]
 ----
+# from source folder, in kicad terminal
 pip install -e .
-# or [not sure if this works..]
-pipx install --editable .
+----
+
+== Other diff tools
+
+If you don't like this diff tool for any reason, here are some others:
+
+* https://github.com/leoheck/kiri
+* https://github.com/jnavila/plotkicadsch
+
+== Other stuff
+
+link:https://opensource.org/licenses/Apache-2.0[
+image:https://img.shields.io/badge/License-Apache_2.0-blue.svg[]
+]
+
+.packaging
+[source,shell]
+----
+# because I always forget
+python setup.py sdist
+python -m twine upload --repository testpypi dist/*
+python -m twine upload dist/*
 ----
