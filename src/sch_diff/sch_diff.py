@@ -8,7 +8,7 @@ import shutil
 import webbrowser
 import pkg_resources
 
-import checkers
+import checkers  # runs a check for kicad-cli
 import kicad_export.export_circuit_for_diff as kexport
 import re
 
@@ -37,7 +37,7 @@ def diff_():
     assert os.path.splitext(files[0])[1] == ".kicad_sch"
     assert os.path.splitext(files[1])[1] == ".kicad_sch"
     ofolder = pathlib.Path(files[0].parent,
-                           # rand_short(int(old_hex[:6],16), int(new_hex[:6],16)) +
+                           rand_short(int(old_hex[:6],16), int(new_hex[:6],16)) +
                            "_autorender_schematics"
                            ).resolve()
     if ofolder.exists():
@@ -63,3 +63,4 @@ def diff_():
 
     print('opening in web browser')
     webbrowser.open('file://' + os.path.realpath(svg_diff_file))
+    exit()

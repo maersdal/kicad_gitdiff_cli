@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='kicad_gitdiff',
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/maersdal/kicad_gitdiff_cli',
     license='Apache-2.0',
     license_files=["LICENSE"],
