@@ -3,8 +3,8 @@ Brute-force diffing svgs
 """
 opacity_1 = '0.3'
 opacity_2 = '0.3'
-red = '#FF0000'  # red
-green = '#00FF00'  # green
+color_1 = '#FF4C51'
+color_2 = '#8D78FF'
 
 
 def kdiff_svg(fname_1, fname_2, fout):
@@ -35,8 +35,8 @@ def replace_with_color(line, color, opacity):
 
 
 def replace1(line):
-    return replace_with_color(line, red, opacity_1)
+    return replace_with_color(line, color_1, opacity_1)
 
 
 def replace2(line):
-    return replace_with_color(line, green, opacity_2)
+    return replace_with_color(line, color_2, opacity_2)

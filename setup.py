@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='kicad_gitdiff',
-    version='0.0.4',
+    version='0.0.5',
     url='https://github.com/maersdal/kicad_gitdiff_cli',
     license='Apache-2.0',
     license_files=["LICENSE"],
@@ -10,7 +10,7 @@ setup(
     author_email='magnus@resani.com',
     description='A tool for a visual diff with git and kicad',
     long_description="""
-Simple visual diff for kicad 7 or higher. one can easily extend this tool to build a diff-er for anything that outputs svg.
+Simple visual diff for kicad 8 or higher. one can easily extend this tool to build a diff-er for anything that outputs svg.
 
 This is not an official kicad tool or anything, just a friday night project.
 

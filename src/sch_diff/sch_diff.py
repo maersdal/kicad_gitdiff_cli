@@ -32,29 +32,50 @@ def diff_():
     path, old_file, old_hex, old_mode, new_file, new_hex, new_mode = sys.argv[1:]
     print("parameters")
     print(path, old_file, old_hex, old_mode, new_file, new_hex, new_mode)
+    if new_file == '/dev/null':
+        print("file was deleted")
+        exit()
+    if old_file == '/dev/null':
+        print("file was created")
+        exit()
+    try:
 
-    files = [pathlib.Path(old_file).resolve(), pathlib.Path(new_file).resolve()]
-    assert os.path.splitext(files[0])[1] == ".kicad_sch"
-    assert os.path.splitext(files[1])[1] == ".kicad_sch"
-    ofolder = pathlib.Path(files[0].parent,
-                           rand_short(int(old_hex[:6],16), int(new_hex[:6],16)) +
-                           "_autorender_schematics"
-                           ).resolve()
-    if ofolder.exists():
-        shutil.rmtree(ofolder)
-    os.makedirs(ofolder)
-    assert ofolder.exists()
+        files = [pathlib.Path(old_file).resolve(), pathlib.Path(new_file).resolve()]
+        assert os.path.splitext(files[0])[1] == ".kicad_sch"
+        assert os.path.splitext(files[1])[1] == ".kicad_sch"
+        ofolder = pathlib.Path(files[0].parent,
+                               rand_short(int(old_hex[:6],16), int(new_hex[:6],16)) +
+                               "_autorender_schematics"
+                               ).resolve()
+        # if ofolder.exists():
+        #     shutil.rmtree(ofolder)
+        os.makedirs(ofolder, exist_ok=True)
+        assert ofolder.exists()
+    except AssertionError as e:
+        raise AssertionError(f"Failed loading sch files for some reason\n parameters:\n "
+                             f"{path=}\n"
+                             f"{old_file=} {old_hex=} {old_mode=} \n"
+                             f"{new_file=} {new_hex=} {new_mode=} \n") from e
+
     print("Tmp rendering folder:", ofolder)
-
-    o = subprocess.run(kexport.render_schematic_wb_cmd(old_file, ofolder), stdout=subprocess.PIPE)
+    cmd_old = kexport.render_schematic_wb_cmd(old_file, ofolder)
+    cmd_new = kexport.render_schematic_wb_cmd(new_file, ofolder)
+    print(f"{cmd_old=}")
+    o = subprocess.run(cmd_old, stdout=subprocess.PIPE)
     old_out = o.stdout.decode('utf-8')
-    n = subprocess.run(kexport.render_schematic_wb_cmd(new_file, ofolder), stdout=subprocess.PIPE)
+    of = re.match(r"Plotted to \'(.*)\'", old_out, re.MULTILINE).group(1)
+    shutil.move(of, of + ".autogen_old.svg")
+    of += ".autogen_old.svg"
+    print(old_out)
+
+    print(f"{cmd_new=}")
+    n = subprocess.run(cmd_new, stdout=subprocess.PIPE)
     new_out = n.stdout.decode('utf-8')
     print("plotting schematics from kicad")
-    print(old_out)
+
     print(new_out)
     print("plotting done")
-    of = re.match(r"Plotted to \'(.*)\'", old_out, re.MULTILINE).group(1)
+
     nf = re.match(r"Plotted to \'(.*)\'", new_out, re.MULTILINE).group(1)
 
     print("diffing svg...")
@@ -63,4 +84,5 @@ def diff_():
 
     print('opening in web browser')
     webbrowser.open('file://' + os.path.realpath(svg_diff_file))
+
     exit()

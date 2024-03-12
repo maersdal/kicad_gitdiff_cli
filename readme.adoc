@@ -100,5 +100,5 @@ image:https://img.shields.io/badge/License-Apache_2.0-blue.svg[]
 # because I always forget
 python setup.py sdist
 python -m twine upload --repository testpypi dist/*
-python -m twine upload dist/*
+python -m twine upload dist/* --repository kicad-gitdiff
 ----
