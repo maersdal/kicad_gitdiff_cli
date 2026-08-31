@@ -1,3 +1,5 @@
+Project archived as Kicad 10 now has better git integration
+
 = Readme
 
 Simple visual diff for kicad 7 or higher. one can easily extend
